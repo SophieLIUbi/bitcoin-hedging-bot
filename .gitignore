@@ -1,0 +1,28 @@
+# Environment files
+.env
+*.env
+!.env.example
+
+# Build files
+*.exe
+*.dll
+*.so
+*.dylib
+bin/
+dist/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Go files
+go.sum
