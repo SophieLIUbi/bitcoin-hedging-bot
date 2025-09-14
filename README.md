@@ -21,7 +21,9 @@
 ### 2. 安装依赖
 
 go mod init arbitrage-bot
+
 go get github.com/adshao/go-binance/v2
+
 go get github.com/joho/godotenv
 
 ### 3. 配置API密钥
@@ -31,75 +33,122 @@ go get github.com/joho/godotenv
 env
 
 BINANCE_API_KEY=your_api_key_here
+
 BINANCE_SECRET_KEY=your_secret_key_here
+
 BINANCE_TESTNET=true
+
 ### 4. 运行机器人
 
 go run main.go
+
 ## 📊 实时监控
+
 机器人运行时会显示详细信息：
 
 
 === 执行策略: 资金费率套利 ===
+
 ✅ Funding Rate: 0.000100 (0.0100%)
+
 Funding Rate: 0.000100 (0.0100%), Net Profit Potential: -0.002700 (-0.2700%)
 
 === 执行策略: 基差交易 ===
+
 Spot: $115955.36, Futures: $115897.27, Basis: -0.000501 (-0.0501%), Net Profit: -0.2701%
 
 === 投资组合摘要 ===
+
 Spot BTC: 0.100000 ($11595.54)
+
 USDT: 1000.00
+
 Futures Position: 0.000000 ($0.00)
+
 Total Portfolio Value: $12595.54
+
 Net Exposure: 0.100000 BTC
 
 ## ⚙️ 策略配置
+
 核心参数
-go
+
 
 minProfitThreshold: 0.0005  // 最小盈利阈值 0.05%
+
 maxPositionSize:    0.1     // 最大仓位 0.1 BTC
+
 spotFeeRate:        0.001   // 现货费率 0.1%
+
 futuresFeeRate:     0.0004  // 期货费率 0.04%
+
 slippageTolerance:  0.0002  // 滑点容忍 0.02%
 ## 策略说明
+
 **1. 资金费率套利**
 
-监控BTCUSDT资金费率
+- 监控BTCUSDT资金费率
+
 当前费率：0.01%（每8小时）
+
 年化收益率：约10.95%
+
 执行条件：净收益 > 0.05%
+
 **2. 基差交易**
 
-监控期货与现货价差
+- 监控期货与现货价差
+
 当前基差：-0.05%（现货溢价）
+
 执行：期货溢价时做空期货+做多现货
+
 **3. Delta中性对冲**
 
 保持现货+期货净敞口=0
+
 自动再平衡仓位
+
 风险最小化
+
 **4. 波动率对冲**
 
 基于历史波动率调整对冲比例
+
 高波动率增加对冲
+
 动态风险管理
+
 ## 🛡️ 风险管理
+
 **资金保护**
+
 最多使用80%的可用资金
+
 最小交易量0.001 BTC
+
 最大单次仓位0.1 BTC
+
 **交易保护**
+
 限价单 + 市价单备用
+
 滑点保护机制
+
 费用精确计算
+
 ## 📱 获取API密钥
+
 访问 币安官网
+
 注册并完成身份验证
+
 前往API管理创建密钥
+
 开启现货和期货交易权限
+
 测试网密钥：testnet.binance.vision
+
 ## 🔧 常见问题
 Q: 为什么显示净收益为负？
 A: 当前费率0.01%，扣除交易费用约0.28%后为负。可降低费率参数或等待更高资金费率。
@@ -111,10 +160,15 @@ Q: 机器人多久执行一次？
 A: 每30秒轮换执行一个策略，每2分钟输出投资组合摘要。
 
 ## ⚠️ 重要提醒
+
 🧪 先在测试网测试：确保策略正常运行后再使用实盘
+
 💰 风险自负：数字货币交易有风险，可能导致本金损失
+
 📊 监控执行：定期检查机器人运行状态和交易记录
+
 🔒 API安全：妥善保管API密钥，建议限制IP访问
+
 📞 技术支持
 ### 如有问题，请检查：
 
